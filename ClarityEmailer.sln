@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{63A6884B-95A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClarityEmailer.UI.Console", "ClarityEmailer.UI.Console\ClarityEmailer.UI.Console.csproj", "{6CD54C2D-6880-4EFD-B2E4-C8AC38DCBF22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClarityEmailer.API", "ClarityEmailer.API\ClarityEmailer.API.csproj", "{81B8AABB-422F-4CC4-B578-0851AA517FF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{A237EC66-5750-4B0C-97C8-ACE8F9B27808}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{6CD54C2D-6880-4EFD-B2E4-C8AC38DCBF22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CD54C2D-6880-4EFD-B2E4-C8AC38DCBF22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CD54C2D-6880-4EFD-B2E4-C8AC38DCBF22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B8AABB-422F-4CC4-B578-0851AA517FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B8AABB-422F-4CC4-B578-0851AA517FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B8AABB-422F-4CC4-B578-0851AA517FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B8AABB-422F-4CC4-B578-0851AA517FF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{91A2AA91-CE01-4A06-8B39-9839DC96002C} = {B410D0D1-B154-4DF3-AC5E-3E4175A53658}
 		{6CD54C2D-6880-4EFD-B2E4-C8AC38DCBF22} = {63A6884B-95AB-4CE9-A837-3966CBD0D67F}
+		{81B8AABB-422F-4CC4-B578-0851AA517FF4} = {A237EC66-5750-4B0C-97C8-ACE8F9B27808}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81BE49FA-9397-4D5E-9EBC-8DD0891EF6A1}
