@@ -1,9 +1,8 @@
+using About.Module.Views;
+
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
-
-using System;
-using System.Reflection;
 
 namespace About.Module;
 public class AboutModule : IModule
