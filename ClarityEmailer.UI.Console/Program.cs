@@ -6,13 +6,36 @@ internal class Program
 {
     private static IServiceProvider _serviceProvider;
 
+    /// <summary>
+    /// Main method for ClarityEmailer
+    /// </summary>
+    /// <param name="args">acceptable args are -api: (calls API for sendmail); [emailaddress]: sends the email to the specified email address</param>
     private static async Task Main(string[] args)
     {
+        var runAPI = false;
+
+        if (args.Contains("-api"))
+        {
+            runAPI = true;
+        }
+
+        // If -toaddress isn't present, give the user the option to add an email address.
+        if (!args.Contains("-toaddress"))
+        {
+            System.Console.WriteLine("Please enter recipient address:");
+            args = new string[] { "-toaddress", System.Console.ReadLine() };
+        }
+
         RegisterServices();
 
         IApp app = _serviceProvider.GetService<IApp>();
 
-        await app.RunLibraryAsync(CreateModel(args));
+        Task task = runAPI ? app.RunAPIAsync(CreateModel(args)) : app.RunLibraryAsync(CreateModel(args));
+
+        await task;
+
+        System.Console.WriteLine("Press any key to close application...");
+        System.Console.ReadKey();
 
         DisposeServices();
     }
@@ -21,7 +44,7 @@ internal class Program
     {
         ICustomLogger logger = new CustomLogger(new("ConsoleLog.txt"), true, LogLevel.Information);
 
-        string settingsFile = "appSettings.json";
+        var settingsFile = "appSettings.json";
 
 #if DEBUG
         settingsFile = "appSettings.Development.json";
@@ -38,6 +61,10 @@ internal class Program
             SmtpPort = Convert.ToInt16(configuration["Email Settings:Smtp Port"]),
             SenderEmail = configuration["Email Settings:Sender Email"],
             Password = configuration["Email Settings:Password"]
+        };
+        GlobalConfig.XApiKey = new()
+        {
+            XApiKey = configuration["XApiKey"]
         };
 
         IServiceCollection collection = new ServiceCollection()
@@ -61,40 +88,19 @@ internal class Program
 
     private static EmailMessageModel CreateModel(string[] args)
     {
-        if (args.Length == 0)
+        EmailMessageModel model = new()
         {
-            return new EmailMessageModel
-            {
-                FromAddress = GlobalConfig.EmailConfig.SenderEmail,
-                ToAddress = "crimsonorion@gmail.com",
-                Subject = "Test Email",
-                Body = "<p>Hello from the email message!</p><p>-Jim Lynch</p>"
-            };
-        }
+            FromAddress = GlobalConfig.EmailConfig.SenderEmail,
+            Subject = "Test Email",
+            Body = "<p>Hello from the email message!</p><p>-Jim Lynch</p>"
+        };
 
-        // -fromAddress claritytest@crimsonorion.com
-        // -toAddress crimsonorion@gmail.com
-        // -subject "Test Email"
-        // -body "<p>Hello from the email message!</p><p>-Jim Lynch</p>"
-        EmailMessageModel model = new();
-        for (int i = 0; i < args.Length; i++)
+        for (var i = 0; i < args.Length; i++)
         {
-            switch (args[i])
+            if (args[i]?.ToLower() == "-toaddress")
             {
-                case "-fromAddress":
-                    model.FromAddress = args[++i];
-                    break;
-                case "-toAddress":
-                    model.ToAddress = args[++i];
-                    break;
-                case "-subject":
-                    model.Subject = args[++i];
-                    break;
-                case "-body":
-                    model.Body = args[++i];
-                    break;
-                default:
-                    break;
+                model.ToAddress = args[++i];
+                break;
             }
         }
 

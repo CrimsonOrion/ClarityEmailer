@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "ClarityEmailer.UI.Console": {
+      "commandName": "Project"
+    }
+  }
+}

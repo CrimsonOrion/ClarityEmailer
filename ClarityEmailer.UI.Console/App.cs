@@ -12,6 +12,12 @@ public class App : IApp
 
     public async Task RunLibraryAsync(EmailMessageModel model)
     {
+        if (string.IsNullOrEmpty(model.ToAddress))
+        {
+            _logger.LogError(new("Missing Parameter"), "Missing -toAddress parameter.");
+            return;
+        }
+
         FluentEmail.Core.Models.SendResponse result = await _emailProcessor.SendEmailAsync(model);
 
         if (result.Successful)
@@ -22,15 +28,22 @@ public class App : IApp
 
     public async Task RunAPIAsync(EmailMessageModel model)
     {
-        string json = JsonSerializer.Serialize(model);
+        var json = JsonSerializer.Serialize(model);
         StringContent? data = new(json, Encoding.UTF8, "application/json");
 
-        string url = "https://localhost:7179/SendEmail";
+        var url = "https://localhost:7185/SendEmail";
         using HttpClient client = new();
-
+        client.DefaultRequestHeaders.Add("XApiKey", GlobalConfig.XApiKey.XApiKey);
         HttpResponseMessage response = await client.PostAsync(url, data);
 
-        string result = response.Content.ReadAsStringAsync().Result;
+        var result = response.Content.ReadAsStringAsync().Result;
+
+        if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        {
+            _logger.LogError(new("Error with request"), result);
+            return;
+        }
+
         _logger.LogInformation(result);
     }
 }
