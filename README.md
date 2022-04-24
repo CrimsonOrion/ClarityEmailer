@@ -37,9 +37,9 @@ _Coming Soon_
 
 ### Planned implementations
 
-* ASP.NET MVC API
+* ~~ASP.NET MVC API~~
 * ~~Console~~
-* WPF
+* ~~WPF~~
 * ASP.NET Web Application
 
 ### Outside Dependencies
