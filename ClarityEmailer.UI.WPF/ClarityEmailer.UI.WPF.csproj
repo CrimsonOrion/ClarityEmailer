@@ -5,14 +5,22 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>annotations</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>email.ico</ApplicationIcon>
+    <Version>1.4.24.1</Version>
+    <AssemblyName>ClarityEmailerWPF</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="appSettings.json" />
+    <None Remove="PatchNotes.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="appSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="email.ico" />
+    <Content Include="PatchNotes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -26,6 +34,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClarityEmailer.Core\ClarityEmailer.Core.csproj" />
+    <ProjectReference Include="..\ClarityEmailer.Library.WPF\ClarityEmailer.Library.WPF.csproj" />
+    <ProjectReference Include="..\WPFModules\About.Module\About.Module.csproj" />
+    <ProjectReference Include="..\WPFModules\EmailerViaAPI.Module\EmailerViaAPI.Module.csproj" />
+    <ProjectReference Include="..\WPFModules\EmailerViaLibrary.Module\EmailerViaLibrary.Module.csproj" />
   </ItemGroup>
 
   <ItemGroup>
