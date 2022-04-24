@@ -1,0 +1,78 @@
+﻿<UserControl 
+    x:Class="EmailerViaAPI.Module.Views.EmailViaAPIView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:theming="urn:controlzex"
+    xmlns:lib="clr-namespace:ClarityEmailer.Library.WPF;assembly=ClarityEmailer.Library.WPF"
+    Dialog:DialogParticipation.Register="{Binding}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    FontSize="14">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <!--  Report Title and Textbox -->
+            <ColumnDefinition Width="auto" />
+            <!--  Button -->
+            <ColumnDefinition Width="auto" />
+            <!--  Any  -->
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <!--  Title  -->
+            <RowDefinition Height="auto" />
+            <!--  Button  -->
+            <RowDefinition Height="auto" />
+            <!--  Any  -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Row 0  -->
+        <TextBlock
+            Name="TitleLabel"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="5"
+            VerticalAlignment="Center"
+            FontSize="20"
+            FontWeight="Bold"
+            Text="{Binding Title}" />
+
+        <!--  Row 1  -->
+        <TextBox
+            x:Name="EmailAddressTextbox"
+            Width="200"
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="5,20,5,5"
+            Padding="10"
+            FontSize="14">
+            <TextBox.Text>
+                <Binding Path="EmailAddress" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <lib:EmailAddressValidationRule ValidatesOnTargetUpdated="True"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Button
+            Name="SendEmailButton"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,20,5,5"
+            Padding="10"
+            Command="{Binding SendEmailCommand}"
+            Content="Send Email"
+            FontSize="14"
+            IsDefault="True"
+            Style="{DynamicResource MahApps.Styles.Button}"
+            TabIndex="3" />
+    </Grid>
+</UserControl>

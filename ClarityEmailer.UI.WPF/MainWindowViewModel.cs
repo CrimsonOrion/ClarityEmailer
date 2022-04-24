@@ -1,8 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
-
-namespace ClarityEmailer.UI.WPF;
+﻿namespace ClarityEmailer.UI.WPF;
 public class MainWindowViewModel : BindableBase
 {
     private readonly IRegionManager _regionManager;
@@ -19,9 +15,21 @@ public class MainWindowViewModel : BindableBase
 
     #region Emailer
 
-    public DelegateCommand EmailerScreenCommand => new(EmailerScreen);
+    #region API
 
-    private void EmailerScreen() => Navigate("EmailerView");
+    public DelegateCommand EmailViaAPIScreenCommand => new(EmailViaAPIScreen);
+
+    private void EmailViaAPIScreen() => Navigate(KnownViewNames.EmailViaAPIView);
+
+    #endregion
+
+    #region Library
+
+    public DelegateCommand EmailViaLibraryScreenCommand => new(EmailViaLibraryScreen);
+
+    private void EmailViaLibraryScreen() => Navigate(KnownViewNames.EmailViaLibraryView);
+
+    #endregion
 
     #endregion
 
@@ -29,7 +37,7 @@ public class MainWindowViewModel : BindableBase
 
     public DelegateCommand AboutScreenCommand => new(AboutScreen);
 
-    private void AboutScreen() => Navigate("AboutView");
+    private void AboutScreen() => Navigate(KnownViewNames.AboutView);
 
     #endregion
 
@@ -45,7 +53,7 @@ public class MainWindowViewModel : BindableBase
 
     #region Private Methods
 
-    private void Navigate(string navigationPath, NavigationParameters navigationParameters = null) => _regionManager.RequestNavigate("MainRegion", navigationPath, navigationParameters);
+    private void Navigate(string navigationPath, NavigationParameters navigationParameters = null) => _regionManager.RequestNavigate(KnownRegionNames.MainRegion, navigationPath, navigationParameters);
 
     #endregion
 }

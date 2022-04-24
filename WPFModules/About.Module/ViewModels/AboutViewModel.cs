@@ -1,7 +1,5 @@
-﻿using Prism.Mvvm;
-using Prism.Regions;
-
-using System;
+﻿using System;
+using System.IO;
 
 namespace About.Module.ViewModels;
 public class AboutViewModel : BindableBase, INavigationAware
@@ -26,7 +24,7 @@ public class AboutViewModel : BindableBase, INavigationAware
 
     #region Constructor
 
-    public AboutViewModel() => PatchNotes = "PatchNotes.txt";
+    public AboutViewModel() => PatchNotes = File.Exists("PatchNotes.txt") ? File.ReadAllText("PatchNotes.txt") : "PatchNotes.txt not found.";
 
     #endregion
 

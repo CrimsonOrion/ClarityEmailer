@@ -11,11 +11,93 @@
     MinWidth="650"
     MinHeight="400"
     MaxWidth="1000"
-    MaxHeight="700"
+    MaxHeight="1000"
     Dialog:DialogParticipation.Register="{Binding}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="MenuIconItemTemplate" DataType="{x:Type mah:HamburgerMenuIconItem}">
+                <Grid Height="48">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="{Binding Icon}"
+                        ToolTip="{Binding Label}" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding Label}" />
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="HamburgerMenuHeaderTemplate">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="Navigation" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
+        <ContentControl Margin="55,5,5,5" prism:RegionManager.RegionName="MainRegion" />
+        <mah:HamburgerMenu
+            x:Name="NaviationMenu"
+            DisplayMode="CompactOverlay"
+            HamburgerMenuHeaderTemplate="{StaticResource HamburgerMenuHeaderTemplate}"
+            IsPaneOpen="False"
+            ItemTemplate="{StaticResource MenuIconItemTemplate}"
+            OptionsItemTemplate="{StaticResource MenuIconItemTemplate}"
+            VerticalScrollBarOnLeftSide="False">
 
+            <mah:HamburgerMenu.ItemsSource>
+                <mah:HamburgerMenuItemCollection>
+
+                    <!-- Email via API Page -->
+                    <mah:HamburgerMenuIconItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:HamburgerMenu}, Path=DataContext.EmailViaAPIScreenCommand}" Label="Email Via API">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <iconPacks:PackIconFileIcons
+                                Width="20"
+                                Height="20"
+                                Kind="Openapi" />
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+
+                    <!-- Email via Library Page -->
+                    <mah:HamburgerMenuIconItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:HamburgerMenu}, Path=DataContext.EmailViaLibraryScreenCommand}" Label="Email Via Library">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <iconPacks:PackIconBoxIcons
+                                Width="20"
+                                Height="20"
+                                Kind="RegularLibrary" />
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.ItemsSource>
+
+            <!--  About Page  -->
+            <mah:HamburgerMenu.OptionsItemsSource>
+                <mah:HamburgerMenuItemCollection>
+                    <mah:HamburgerMenuIconItem Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mah:HamburgerMenu}, Path=DataContext.AboutScreenCommand}" Label="About">
+                        <mah:HamburgerMenuIconItem.Icon>
+                            <iconPacks:PackIconMaterial
+                                Width="20"
+                                Height="20"
+                                Kind="Help" />
+                        </mah:HamburgerMenuIconItem.Icon>
+                    </mah:HamburgerMenuIconItem>
+                </mah:HamburgerMenuItemCollection>
+            </mah:HamburgerMenu.OptionsItemsSource>
+
+        </mah:HamburgerMenu>
     </Grid>
 </mah:MetroWindow>

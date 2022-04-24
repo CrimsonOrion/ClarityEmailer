@@ -1,17 +1,4 @@
-﻿using ClarityEmailer.Core;
-using ClarityEmailer.Core.Processors;
-
-using ControlzEx.Theming;
-
-using Library.NET.Logging;
-
-using MahApps.Metro.Controls.Dialogs;
-
-using Microsoft.Extensions.Configuration;
-
-using Prism.Ioc;
-
-using System;
+﻿using System;
 using System.Windows;
 
 namespace ClarityEmailer.UI.WPF;
@@ -34,9 +21,15 @@ public partial class App
         // Set up the custom logger to go to Desktop
         ICustomLogger logger = new CustomLogger(new("WPFLog.txt"), true, LogLevel.Information);
 
+        var appSettingsFilename = "appSettings.json";
+
+#if DEBUG
+        appSettingsFilename = "appSettings.Development.json";
+#endif
+
         // Set up the configuration using the appSettings.json file.
         IConfigurationRoot configuration = new ConfigurationBuilder()
-            .AddJsonFile("appSettings.json", false, true)
+            .AddJsonFile(appSettingsFilename, false, true)
             .Build();
 
 
@@ -48,19 +41,21 @@ public partial class App
             Password = configuration["Email Settings:Password"] ?? ""
         };
 
+        GlobalConfig.XApiKey = new()
+        {
+            XApiKey = configuration["XApiKey"]
+        };
+
         containerRegistry
             .RegisterInstance(logger)
-
             .RegisterInstance<IDialogCoordinator>(new DialogCoordinator())
 
             .Register<IEmailProcessor, EmailProcessor>()
             ;
     }
 
-    //protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog) => moduleCatalog
-    //        .AddModule<CustomerServiceModule>()
-    //        .AddModule<MarketingModule>()
-    //        .AddModule<SupportServicesModule>()
-    //        .AddModule<AccountingModule>()
-    //        .AddModule<AboutModule>();
+    protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog) => moduleCatalog
+        .AddModule<AboutModule>()
+        .AddModule<EmailerViaAPIModule>()
+        .AddModule<EmailerViaLibraryModule>();
 }
