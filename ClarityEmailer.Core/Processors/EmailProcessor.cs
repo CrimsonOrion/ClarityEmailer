@@ -3,14 +3,11 @@ public class EmailProcessor : IEmailProcessor
 {
     private readonly ICustomLogger _logger;
 
-    public EmailProcessor(ICustomLogger logger)
-    {
-        _logger = logger;
-    }
+    public EmailProcessor(ICustomLogger logger) => _logger = logger;
 
     public async Task<SendResponse> SendEmailAsync(EmailMessageModel model)
     {
-        int attempts = 0;
+        var attempts = 0;
         SendResponse result = null;
         StringBuilder stringBuilder = new();
 
@@ -34,7 +31,7 @@ public class EmailProcessor : IEmailProcessor
                     return result;
                 }
 
-                foreach (string err in result.ErrorMessages)
+                foreach (var err in result.ErrorMessages)
                 {
                     stringBuilder.AppendLine(err);
                 }

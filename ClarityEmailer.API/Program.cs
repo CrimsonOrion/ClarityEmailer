@@ -1,8 +1,9 @@
 using ClarityEmailer.API.Middleware;
-using ClarityEmailer.Core.Processors;
 using ClarityEmailer.Core;
+using ClarityEmailer.Core.Processors;
 
 using Library.NET.Logging;
+
 using LogLevel = Library.NET.Logging.LogLevel;
 
 var builder = WebApplication.CreateBuilder(args);
