@@ -6,5 +6,14 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to the API Emailer!</h1>
-    <p>Select which delivery system you'd like to use: <a href=~/LibraryEmailer>Library</a> or <a href=~/APIEmailer>API</a></p>
+</div>
+
+<div class="text-body">
+    <p>Enter Recipient Email Address:</p>
+    <form method="post">
+        <input type="text" asp-for="ToAddress" placeholder="Recipient Address" />
+        <span asp-validation-for="ToAddress"></span>
+        <button type="submit">Send Email</button>
+    </form>
+    <p style="color:red">@Model.Status</p>
 </div>

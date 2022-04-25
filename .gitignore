@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /ClarityEmailer.UI.Console/appSettings.Development.json
 /ClarityEmailer.UI.WPF/appSettings.Development.json
+/ClarityEmailer.API/EmailProcessorLog.txt
