@@ -30,7 +30,7 @@ internal class Program
 
         IApp app = _serviceProvider.GetService<IApp>();
 
-        Task task = runAPI ? app.RunAPIAsync(CreateModel(args)) : app.RunLibraryAsync(CreateModel(args));
+        Task task = runAPI ? app.RunAPIAsync(CreateModel(args, runAPI)) : app.RunLibraryAsync(CreateModel(args, runAPI));
 
         await task;
 
@@ -86,13 +86,14 @@ internal class Program
         }
     }
 
-    private static EmailMessageModel CreateModel(string[] args)
+    private static EmailMessageModel CreateModel(string[] args, bool runApi)
     {
+        var source = runApi ? "API" : "Core Library";
         EmailMessageModel model = new()
         {
             FromAddress = GlobalConfig.EmailConfig.SenderEmail,
             Subject = "Test Email",
-            Body = "<p>Hello from the email message!</p><p>-Jim Lynch</p>"
+            Body = $"<p>Hello from the console email message via {source}!</p><p>-Jim Lynch</p>"
         };
 
         for (var i = 0; i < args.Length; i++)
