@@ -25,11 +25,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FC93
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "About.Module", "WPFModules\About.Module\About.Module.csproj", "{476F860F-0FAC-44C7-9DC9-6E5F5EB08B93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailerViaLibrary.Module", "WPFModules\EmailerViaLibrary.Module\EmailerViaLibrary.Module.csproj", "{8BB703A4-4B5B-4458-B500-CF5E68D65A80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailerViaLibrary.Module", "WPFModules\EmailerViaLibrary.Module\EmailerViaLibrary.Module.csproj", "{8BB703A4-4B5B-4458-B500-CF5E68D65A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailerViaAPI.Module", "WPFModules\EmailerViaAPI.Module\EmailerViaAPI.Module.csproj", "{3F4A2A50-F59D-4712-A76E-803328AB2C4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailerViaAPI.Module", "WPFModules\EmailerViaAPI.Module\EmailerViaAPI.Module.csproj", "{3F4A2A50-F59D-4712-A76E-803328AB2C4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClarityEmailer.Library.WPF", "ClarityEmailer.Library.WPF\ClarityEmailer.Library.WPF.csproj", "{B4C8AA94-1210-4B92-9999-D9D1664CFC15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClarityEmailer.Library.WPF", "ClarityEmailer.Library.WPF\ClarityEmailer.Library.WPF.csproj", "{B4C8AA94-1210-4B92-9999-D9D1664CFC15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET", "ASP.NET", "{C259E52E-37C4-495B-B7AF-4466ED05B90C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClarityEmailer.UI.ASPNET", "ClarityEmailer.UI.ASPNET\ClarityEmailer.UI.ASPNET.csproj", "{E4662BBE-F8C3-4DF3-9391-EED19BBEE3A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{B4C8AA94-1210-4B92-9999-D9D1664CFC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4C8AA94-1210-4B92-9999-D9D1664CFC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4C8AA94-1210-4B92-9999-D9D1664CFC15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4662BBE-F8C3-4DF3-9391-EED19BBEE3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4662BBE-F8C3-4DF3-9391-EED19BBEE3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4662BBE-F8C3-4DF3-9391-EED19BBEE3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4662BBE-F8C3-4DF3-9391-EED19BBEE3A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +93,8 @@ Global
 		{8BB703A4-4B5B-4458-B500-CF5E68D65A80} = {FC93E3D7-C7AD-41D5-886C-6CD136A399F5}
 		{3F4A2A50-F59D-4712-A76E-803328AB2C4E} = {FC93E3D7-C7AD-41D5-886C-6CD136A399F5}
 		{B4C8AA94-1210-4B92-9999-D9D1664CFC15} = {B410D0D1-B154-4DF3-AC5E-3E4175A53658}
+		{C259E52E-37C4-495B-B7AF-4466ED05B90C} = {63A6884B-95AB-4CE9-A837-3966CBD0D67F}
+		{E4662BBE-F8C3-4DF3-9391-EED19BBEE3A4} = {C259E52E-37C4-495B-B7AF-4466ED05B90C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81BE49FA-9397-4D5E-9EBC-8DD0891EF6A1}
