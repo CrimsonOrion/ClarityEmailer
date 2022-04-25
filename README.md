@@ -40,7 +40,8 @@ _Coming Soon_
 * ~~ASP.NET MVC API~~
 * ~~Console~~
 * ~~WPF~~
-* ASP.NET Web Application
+* ~~ASP.NET Web Application~~
+* Fix logging
 
 ### Outside Dependencies
 
