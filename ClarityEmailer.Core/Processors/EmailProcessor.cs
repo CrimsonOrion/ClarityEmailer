@@ -31,12 +31,18 @@ public class EmailProcessor : IEmailProcessor
                     return result;
                 }
 
+                StringBuilder errorStringBuilder = new();
+
                 foreach (var err in result.ErrorMessages)
                 {
-                    stringBuilder.AppendLine(err);
+                    errorStringBuilder.AppendLine(err);
                 }
 
-                _logger.LogError(new($"Email Failed to Send. Resending after {attempts} second(s)."), stringBuilder.ToString());
+                var errorMessage = "Email Failed to Send.";
+
+                errorMessage += attempts < 3 ? $" Resending after {attempts} second(s)." : " No more retries remaining.";
+
+                _logger.LogError(new(errorMessage), $"{stringBuilder}\r\n{errorStringBuilder}");
                 Thread.Sleep(1000 * attempts);
             }
             catch (Exception ex)
