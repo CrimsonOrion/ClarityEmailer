@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 
@@ -58,7 +59,13 @@ public class APIEmailerModel : PageModel
         var message = new { ToAddress = ToAddress.Trim() };
         StringContent? data = new(JsonSerializer.Serialize(message), Encoding.UTF8, "application/json");
 
-        var url = "https://localhost:7185/SendEmail";
+        var port = _config["Port List:Release"];
+
+#if DEBUG
+        port = _config["Port List:Debug"];
+#endif
+
+        var url = $"https://localhost:{port}/SendEmail";
         using HttpClient client = new();
         client.DefaultRequestHeaders.Add("XApiKey", _config["XApiKey"]);
 

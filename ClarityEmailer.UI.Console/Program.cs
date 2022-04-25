@@ -67,6 +67,12 @@ internal class Program
             XApiKey = configuration["XApiKey"]
         };
 
+        GlobalConfig.Ports = new()
+        {
+            DebugPort = Convert.ToInt16(configuration["Port List:Debug"]),
+            ReleasePort = Convert.ToInt16(configuration["Port List:Release"])
+        };
+
         IServiceCollection collection = new ServiceCollection()
             .AddScoped<IApp, App>()
             .AddScoped<IEmailProcessor, EmailProcessor>()

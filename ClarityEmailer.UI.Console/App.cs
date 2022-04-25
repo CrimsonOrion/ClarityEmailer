@@ -31,7 +31,13 @@ public class App : IApp
         var json = JsonSerializer.Serialize(model);
         StringContent? data = new(json, Encoding.UTF8, "application/json");
 
-        var url = "https://localhost:7185/SendEmail";
+        var port = GlobalConfig.Ports.ReleasePort;
+
+#if DEBUG
+        port = GlobalConfig.Ports.DebugPort;
+#endif
+
+        var url = $"https://localhost:{port}/SendEmail";
         using HttpClient client = new();
         client.DefaultRequestHeaders.Add("XApiKey", GlobalConfig.XApiKey.XApiKey);
         HttpResponseMessage response = await client.PostAsync(url, data);

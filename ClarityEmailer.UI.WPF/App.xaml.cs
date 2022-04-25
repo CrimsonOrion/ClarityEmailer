@@ -46,6 +46,12 @@ public partial class App
             XApiKey = configuration["XApiKey"]
         };
 
+        GlobalConfig.Ports = new()
+        {
+            DebugPort = Convert.ToInt16(configuration["Port List:Debug"]),
+            ReleasePort = Convert.ToInt16(configuration["Port List:Release"])
+        };
+
         containerRegistry
             .RegisterInstance(logger)
             .RegisterInstance<IDialogCoordinator>(new DialogCoordinator())
