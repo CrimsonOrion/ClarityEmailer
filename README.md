@@ -24,16 +24,64 @@ comes first, and can be sent in succession or over a period of time.
 * _**EXTRA Credit**_ if a front end (wpf/asp.net web application/etc...) calls the API to send the email.
 * In any scenario you should be able to take in an input of a recipient email to send a test email. 
 
-## Test
+## Test & Usage
 
 Clone the repository locally
 ```bash
 git clone https://github.com/CrimsonOrion/ClarityEmailer.git
 ```
+Run the API project:
+```bash
+cd clarityemailer\clarityemailer.api
+dotnet run clarityemailer.api
+```
+Run the ASP.NET project:
+```bash
+cd clarityemailer\clarityemailer.ui.aspnet
+dotnet run clarityemailerwebsite
+```
 
-## Usage
+Then you can go to the [ASP.NET page](https://localhost:7135)
+<p align="left">
+  <img src="https://www.crimsonorion.com/img/ClarityEmailer-ASPNET-Startpage.png" alt="ASP.NET UI Startup page" />
+</p>
 
-_Coming Soon_
+In the [ASP.NET page](https://localhost:7135), select either the [Library](https://localhost:7135/LibraryEmailer) or [API](https://localhost:7135/APIEmailer) link and enter an email address to send an email via Core Library or API call.
+
+---
+(You can also go to the [API page](https://localhost:7185/swagger) and look at the Swagger UI)
+<p align="left">
+  <img src="https://www.crimsonorion.com/img/ClarityEmailer-API-Swagger.png" alt="ASP.NET API Swagger page" />
+</p>
+
+---
+
+Run the Console project:
+```bash
+cd clarityemailer\clarityemailer.ui.console
+dotnet run clarityemailer -api -toaddress EMAIL@ADDRESS.COM
+```
+
+#### Options
+* `-api`_optional_: Use the API to send email. *_Ignore this argument to send via Core Library_.
+* `-toaddress`: The email address you want to send the message to. _*If you don't supply this argument, it will prompt you to supply an email address_.
+---
+
+Run the WPF project:
+```bash
+cd clarityemailer\clarityemailer.ui.wpf
+dotnet run clarityemailerwpf
+```
+
+Clarity Emailer (WPF):
+<p align="left">
+  <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-Start.png" alt="WPF Start page" />
+</p>
+
+Select either <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-EmailAPI.png" alt="Email via API" /> or <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-EmailLibrary.png" alt="Email via Library" /> to send via the desired method.
+
+### Hopes
+I hope you guys like the project. If you have any questions, feel free to email me at crimsonorion@gmail.com. I look forward to talking to you guys about it!
 
 ### Planned implementations
 
@@ -41,7 +89,7 @@ _Coming Soon_
 * ~~Console~~
 * ~~WPF~~
 * ~~ASP.NET Web Application~~
-* Fix logging
+* ~~Fix logging~~
 
 ### Outside Dependencies
 
