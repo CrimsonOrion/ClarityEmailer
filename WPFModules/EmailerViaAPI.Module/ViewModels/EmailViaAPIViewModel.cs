@@ -106,14 +106,7 @@ public class EmailViaAPIViewModel : BindableBase, INavigationAware
 
     private async Task<bool> SendEmailThroughAPI()
     {
-        var json = JsonSerializer.Serialize(new
-        {
-            ToAddress = EmailAddress,
-            FromAddress = GlobalConfig.EmailConfig.SenderEmail,
-            Subject = "Test Email",
-            Body = "<p>Hello from the email message!</p><p>-Jim Lynch</p>"
-        });
-        StringContent? data = new(json, Encoding.UTF8, "application/json");
+        StringContent? data = new(JsonSerializer.Serialize(new { ToAddress = EmailAddress }), Encoding.UTF8, "application/json");
 
         var url = "https://localhost:7185/SendEmail";
         using HttpClient client = new();
