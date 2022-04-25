@@ -1,14 +1,14 @@
-﻿using ClarityEmailer.API.Logging;
-using ClarityEmailer.API.Models;
+﻿using ClarityEmailer.API.Models;
 using ClarityEmailer.Core;
 using ClarityEmailer.Core.Models;
 using ClarityEmailer.Core.Processors;
 
 using FluentEmail.Core.Models;
 
+using Library.NET.Logging;
+
 using Microsoft.AspNetCore.Mvc;
 
-using System.Text;
 using System.Text.Json;
 
 namespace ClarityEmailer.API.Controllers;
@@ -19,17 +19,14 @@ public class SendEmailController : ControllerBase
     private readonly ILogger<SendEmailController> _logger;
     private readonly IEmailProcessor _emailer;
     private readonly IConfiguration _configuration;
-    private readonly string _logFilename;
+    private readonly ICustomLogger _customLogger;
 
-    public SendEmailController(ILogger<SendEmailController> logger, IEmailProcessor emailer, IConfiguration configuration)
+    public SendEmailController(ILogger<SendEmailController> logger, IEmailProcessor emailer, IConfiguration configuration, ICustomLogger customLogger)
     {
         _logger = logger;
         _emailer = emailer;
         _configuration = configuration;
-
-        _logFilename = configuration["Log File Name"];
-
-        LogToFile.FilePath = _logFilename;
+        _customLogger = customLogger;
     }
 
     [HttpPost]
@@ -61,7 +58,7 @@ public class SendEmailController : ControllerBase
                 message.Result = "Success";
                 var json = JsonSerializer.Serialize(message);
                 _logger.LogInformation("{json}", json);
-                await LogToFile.WriteEntryAsync(json);
+                _customLogger.LogInformation(json);
                 return message;
             }
         }
@@ -69,7 +66,7 @@ public class SendEmailController : ControllerBase
         {
             var json = JsonSerializer.Serialize(message);
             _logger.LogError(ex, "{json}", json);
-            await LogToFile.WriteEntryAsync(json);
+            _customLogger.LogError(ex, json);
         }
 
         return BadRequest();
