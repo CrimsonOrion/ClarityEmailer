@@ -81,7 +81,7 @@ public class EmailViaLibraryViewModel : BindableBase, INavigationAware
                 ToAddress = EmailAddress,
                 FromAddress = GlobalConfig.EmailConfig.SenderEmail,
                 Subject = "Test Email",
-                Body = "<p>Hello from the email message!</p><p>-Jim Lynch</p>"
+                Body = "<p>Hello from the WPF email message via Core Library!</p><p>-Jim Lynch</p>"
             });
 
             message = "Sending email...";
