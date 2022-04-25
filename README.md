@@ -79,8 +79,8 @@ Clarity Emailer (WPF):
 </p>
 
 Select either <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-EmailAPI.png" alt="Email via API" /> or <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-EmailLibrary.png" alt="Email via Library" /> to send via the desired method.
----
 
+---
 #### Test via Postman
 You can also test via [Postman](https://www.postman.com) using this [collection](https://www.crimsonorion.com/img/ClarityEmailer.postman_collection.json).
 <p align="left">
