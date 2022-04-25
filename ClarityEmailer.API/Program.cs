@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-ICustomLogger logger = new CustomLogger(new("EmailProcessorLog.txt"), true, Library.NET.Logging.LogLevel.Information);
+ICustomLogger logger = new CustomLogger(new("EmailProcessor.log"), true, Library.NET.Logging.LogLevel.Information);
 
 builder.Services.AddSingleton(logger);
 builder.Services.AddScoped<IEmailProcessor, EmailProcessor>();

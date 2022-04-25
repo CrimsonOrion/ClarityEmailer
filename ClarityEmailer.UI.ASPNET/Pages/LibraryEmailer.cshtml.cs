@@ -2,6 +2,8 @@ using ClarityEmailer.Core;
 using ClarityEmailer.Core.Models;
 using ClarityEmailer.Core.Processors;
 
+using Library.NET.Logging;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,6 +13,7 @@ namespace ClarityEmailer.UI.ASPNET.Pages;
 public class LibraryEmailerModel : PageModel
 {
     private readonly ILogger<LibraryEmailerModel> _logger;
+    private readonly ICustomLogger _customLogger;
     private readonly IConfiguration _config;
     private readonly IEmailProcessor _emailProcessor;
 
@@ -21,9 +24,10 @@ public class LibraryEmailerModel : PageModel
 
     public string Status { get; private set; }
 
-    public LibraryEmailerModel(ILogger<LibraryEmailerModel> logger, IConfiguration config, IEmailProcessor emailProcessor)
+    public LibraryEmailerModel(ILogger<LibraryEmailerModel> logger, IConfiguration config, IEmailProcessor emailProcessor, ICustomLogger customLogger)
     {
         _logger = logger;
+        _customLogger = customLogger;
         _config = config;
         _emailProcessor = emailProcessor;
     }
@@ -61,6 +65,8 @@ public class LibraryEmailerModel : PageModel
         var statusMessage = $"Sending Email to {message.ToAddress}";
 
         _logger.LogInformation(statusMessage);
+        _customLogger.LogInformation(statusMessage);
+
         Status = statusMessage;
         FluentEmail.Core.Models.SendResponse result = await _emailProcessor.SendEmailAsync(message);
 
@@ -69,12 +75,14 @@ public class LibraryEmailerModel : PageModel
             statusMessage = "Message Sent Successfully";
             Status = statusMessage;
             _logger.LogInformation(statusMessage);
+            _customLogger.LogInformation(statusMessage);
             return Page();
         }
 
         statusMessage = "Email did not send correctly. Check logs for more information.";
         Status = statusMessage;
         _logger.LogError(statusMessage);
+        _customLogger.LogError(new("Email failed to send"), statusMessage);
         return Page();
     }
 }

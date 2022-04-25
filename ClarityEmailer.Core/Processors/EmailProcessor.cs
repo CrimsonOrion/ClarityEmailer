@@ -27,6 +27,7 @@ public class EmailProcessor : IEmailProcessor
                 if (result.Successful)
                 {
                     stringBuilder.AppendLine($"Sent: {DateTime.UtcNow}");
+                    stringBuilder.AppendLine($"Result: Success");
                     _logger.LogInformation(stringBuilder.ToString());
                     return result;
                 }

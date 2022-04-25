@@ -6,4 +6,5 @@ public class EmailMessageModel
     public string Subject { get; set; }
     public string Body { get; set; }
     public DateTime Sent { get; set; }
+    public string Result { get; set; }
 }

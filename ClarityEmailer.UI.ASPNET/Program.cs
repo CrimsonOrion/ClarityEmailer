@@ -11,7 +11,7 @@ if (!File.Exists("logfile.log"))
     File.Create("logfile.log");
 }
 
-ICustomLogger logger = new CustomLogger(new("logfile.log"), true, Library.NET.Logging.LogLevel.Information);
+ICustomLogger logger = new CustomLogger(new("aspnetEmailer.log"), false, Library.NET.Logging.LogLevel.Information);
 
 builder.Services.AddSingleton(logger);
 builder.Services.AddScoped<IEmailProcessor, EmailProcessor>();

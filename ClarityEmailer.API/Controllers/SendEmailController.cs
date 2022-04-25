@@ -58,6 +58,7 @@ public class SendEmailController : ControllerBase
             if (result.Successful)
             {
                 message.Sent = DateTime.UtcNow;
+                message.Result = "Success";
                 var json = JsonSerializer.Serialize(message);
                 _logger.LogInformation("{json}", json);
                 await LogToFile.WriteEntryAsync(json);

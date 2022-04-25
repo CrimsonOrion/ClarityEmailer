@@ -1,3 +1,5 @@
+using Library.NET.Logging;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,6 +12,7 @@ namespace ClarityEmailer.UI.ASPNET.Pages;
 public class APIEmailerModel : PageModel
 {
     private readonly ILogger<APIEmailerModel> _logger;
+    private readonly ICustomLogger _customLogger;
     private readonly IConfiguration _config;
 
     [BindProperty]
@@ -19,9 +22,10 @@ public class APIEmailerModel : PageModel
 
     public string Status { get; private set; }
 
-    public APIEmailerModel(ILogger<APIEmailerModel> logger, IConfiguration config)
+    public APIEmailerModel(ILogger<APIEmailerModel> logger, IConfiguration config, ICustomLogger customLogger)
     {
         _logger = logger;
+        _customLogger = customLogger;
         _config = config;
     }
 
@@ -57,17 +61,31 @@ public class APIEmailerModel : PageModel
         var url = "https://localhost:7185/SendEmail";
         using HttpClient client = new();
         client.DefaultRequestHeaders.Add("XApiKey", _config["XApiKey"]);
-        HttpResponseMessage response = await client.PostAsync(url, data);
 
-        var result = response.Content.ReadAsStringAsync().Result;
+        var result = string.Empty;
 
-        if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        try
         {
+            HttpResponseMessage response = await client.PostAsync(url, data);
+            result = response.Content.ReadAsStringAsync().Result;
+
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                _logger.LogError(result);
+                _customLogger.LogError(new($"Status Code: {response.StatusCode}"), result);
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            result = ex.Message;
             _logger.LogError(result);
+            _customLogger.LogError(ex, $"Attempted to send email to {ToAddress}, but it failed with the following error:\r\n{result}");
             return result;
         }
 
         _logger.LogInformation(result);
+        _customLogger.LogInformation(result);
         return result;
     }
 }
