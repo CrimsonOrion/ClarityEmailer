@@ -30,6 +30,15 @@ Clone the repository locally
 ```bash
 git clone https://github.com/CrimsonOrion/ClarityEmailer.git
 ```
+Update the appSettings.json (or appSettings.Development.json for Debugging) for the API Project and ASP.NET project.
+```json
+"Email Settings": {
+        "Smtp Server": "[INSERT SMTP SERVER HERE]",
+        "Smtp Port": 25,
+        "Sender Email": "EMAIL@ADDRESS.COM",
+        "Password": "[IF AUTHENTICATION IS REQUIRED, ENTER PASSWORD HERE]"
+    }
+```
 Run the API project:
 ```bash
 cd clarityemailer\clarityemailer.api
@@ -55,7 +64,15 @@ In the [ASP.NET page](https://localhost:7135), select either the [Library](https
 </p>
 
 ---
-
+Update the appSettings.json (or appSettings.Development.json for Debugging) for the Console project.
+```json
+"Email Settings": {
+        "Smtp Server": "[INSERT SMTP SERVER HERE]",
+        "Smtp Port": 25,
+        "Sender Email": "EMAIL@ADDRESS.COM",
+        "Password": "[IF AUTHENTICATION IS REQUIRED, ENTER PASSWORD HERE]"
+    }
+```
 Run the Console project:
 ```bash
 cd clarityemailer\clarityemailer.ui.console
@@ -66,7 +83,15 @@ dotnet run clarityemailer -api -toaddress EMAIL@ADDRESS.COM
 * `-api`_optional_: Use the API to send email. *_Ignore this argument to send via Core Library_.
 * `-toaddress`: The email address you want to send the message to. _*If you don't supply this argument, it will prompt you to supply an email address_.
 ---
-
+Update the appSettings.json (or appSettings.Development.json for Debugging) for the WPF project.
+```json
+"Email Settings": {
+        "Smtp Server": "[INSERT SMTP SERVER HERE]",
+        "Smtp Port": 25,
+        "Sender Email": "EMAIL@ADDRESS.COM",
+        "Password": "[IF AUTHENTICATION IS REQUIRED, ENTER PASSWORD HERE]"
+    }
+```
 Run the WPF project:
 ```bash
 cd clarityemailer\clarityemailer.ui.wpf
@@ -79,6 +104,13 @@ Clarity Emailer (WPF):
 </p>
 
 Select either <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-EmailAPI.png" alt="Email via API" /> or <img src="https://www.crimsonorion.com/img/ClarityEmailer-WPF-EmailLibrary.png" alt="Email via Library" /> to send via the desired method.
+
+---
+#### Test via Postman
+You can also test via [Postman](https://www.postman.com) using this [collection](https://www.crimsonorion.com/img/ClarityEmailer.postman_collection.json).
+<p align="left">
+  <img src="https://www.crimsonorion.com/img/ClarityEmailer-Postman.png" alt="Postman image" />
+</p>
 
 ### Hopes
 I hope you guys like the project. If you have any questions, feel free to email me at crimsonorion@gmail.com. I look forward to talking to you guys about it!
