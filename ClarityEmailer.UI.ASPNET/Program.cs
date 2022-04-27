@@ -6,11 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-if (!File.Exists("logfile.log"))
-{
-    File.Create("logfile.log");
-}
-
 ICustomLogger logger = new CustomLogger(new("aspnetEmailer.log"), false, Library.NET.Logging.LogLevel.Information);
 
 builder.Services.AddSingleton(logger);
