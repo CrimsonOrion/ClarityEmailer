@@ -30,6 +30,15 @@ Clone the repository locally
 ```bash
 git clone https://github.com/CrimsonOrion/ClarityEmailer.git
 ```
+Update the appSettings.json (or appSettings.Development.json for Debugging) for the API Project and ASP.NET project.
+```json
+"Email Settings": {
+        "Smtp Server": "[INSERT SMTP SERVER HERE]",
+        "Smtp Port": 25,
+        "Sender Email": "EMAIL@ADDRESS.COM",
+        "Password": "[IF AUTHENTICATION IS REQUIRED, ENTER PASSWORD HERE]"
+    }
+```
 Run the API project:
 ```bash
 cd clarityemailer\clarityemailer.api
@@ -55,7 +64,15 @@ In the [ASP.NET page](https://localhost:7135), select either the [Library](https
 </p>
 
 ---
-
+Update the appSettings.json (or appSettings.Development.json for Debugging) for the Console project.
+```json
+"Email Settings": {
+        "Smtp Server": "[INSERT SMTP SERVER HERE]",
+        "Smtp Port": 25,
+        "Sender Email": "EMAIL@ADDRESS.COM",
+        "Password": "[IF AUTHENTICATION IS REQUIRED, ENTER PASSWORD HERE]"
+    }
+```
 Run the Console project:
 ```bash
 cd clarityemailer\clarityemailer.ui.console
@@ -66,7 +83,15 @@ dotnet run clarityemailer -api -toaddress EMAIL@ADDRESS.COM
 * `-api`_optional_: Use the API to send email. *_Ignore this argument to send via Core Library_.
 * `-toaddress`: The email address you want to send the message to. _*If you don't supply this argument, it will prompt you to supply an email address_.
 ---
-
+Update the appSettings.json (or appSettings.Development.json for Debugging) for the WPF project.
+```json
+"Email Settings": {
+        "Smtp Server": "[INSERT SMTP SERVER HERE]",
+        "Smtp Port": 25,
+        "Sender Email": "EMAIL@ADDRESS.COM",
+        "Password": "[IF AUTHENTICATION IS REQUIRED, ENTER PASSWORD HERE]"
+    }
+```
 Run the WPF project:
 ```bash
 cd clarityemailer\clarityemailer.ui.wpf
