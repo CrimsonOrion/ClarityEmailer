@@ -19,7 +19,7 @@ public partial class App
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
         // Set up the custom logger to go to Desktop
-        ICustomLogger logger = new CustomLogger(new("WPFLog.txt"), true, LogLevel.Information);
+        ICustomLogger logger = new CustomLogger(new("WPFEmailer.log"), true, LogLevel.Information);
 
         var appSettingsFilename = "appSettings.json";
 

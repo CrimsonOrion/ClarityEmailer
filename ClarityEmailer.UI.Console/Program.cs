@@ -42,7 +42,7 @@ internal class Program
 
     private static void RegisterServices()
     {
-        ICustomLogger logger = new CustomLogger(new("ConsoleLog.txt"), true, LogLevel.Information);
+        ICustomLogger logger = new CustomLogger(new("ConsoleEmailer.log"), true, LogLevel.Information);
 
         var settingsFile = "appSettings.json";
 
